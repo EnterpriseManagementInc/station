@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resource :session
 
+  match 'caclogin', :to => 'sessions#create', :as => 'login'
   match 'login', :to => 'sessions#new', :as => 'login'
   match 'logout', :to => 'sessions#destroy', :as => 'logout'
 
