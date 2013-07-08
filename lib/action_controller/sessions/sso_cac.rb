@@ -9,7 +9,7 @@ module ActionController #:nodoc:
         agent = nil
         cn_capture = /CN=(.*)/.match(request.headers["HTTP_DN"]).captures[0]
 
-        agent = user.find_by_cert(cn_capture)
+        agent = User.find_by_cert(cn_capture)
 
         if agent
           if agent.class.agent_options[:activation] && ! agent.activated_at
