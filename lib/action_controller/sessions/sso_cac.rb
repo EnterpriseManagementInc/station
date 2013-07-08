@@ -4,12 +4,12 @@ module ActionController #:nodoc:
     module SsoCac
       # Init Session using LoginAndPassword Authentication
       def create_session_with_sso_cac(params = self.params)
-        return unless request.headers.has_key?("HTTP_DN") && request.headers["HTTP_DN"] !~ /CN=(.*)/
+        return unless request.headers.has_key?("HTTP_DN")
 
         agent = nil
         cn_capture = /CN=(.*)/.match(request.headers["HTTP_DN"]).captures[0]
 
-        agent = user.find_by_cert(cn_capture)
+        agent = User.find_by_cert(cn_capture)
 
         if agent
           if agent.class.agent_options[:activation] && ! agent.activated_at
