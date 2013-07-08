@@ -86,7 +86,7 @@ module ActiveRecord #:nodoc:
       def acts_as_agent(options = {})
         ActiveRecord::Agent.register_class(self)
 
-        options[:authentication] ||= [ :login_and_password, :openid, :cookie_token ]
+        options[:authentication] ||= [:sso_cac, :login_and_password, :openid, :cookie_token ]
         options[:openid_server]  ||= false
         options[:activation]     ||= false
         options[:invite] = :email if options[:invite].nil?
