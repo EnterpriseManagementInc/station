@@ -12,9 +12,13 @@ module ActiveRecord #:nodoc:
       #
       # Options:
       # * cas_filter: Options to pass to the CAS Filter
-      module SSO_CAC
+      module SsoCac
+        class << self
+          def included(base) #:nodoc:
+            base.extend ClassMethods
+          end
+        end
       end
-      Cac = SSO_CAC
     end
   end
 end
