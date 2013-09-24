@@ -57,7 +57,8 @@ module ActiveRecord #:nodoc:
 
           # Encrypts some data with the salt.
           def encrypt(password, salt)
-            Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+            #Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+            Digest::SHA1.hexdigest("#{password}")
           end
         end
 
