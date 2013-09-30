@@ -16,10 +16,5 @@
 
 <p><label for="password_confirmation"><%%= t(:"agent.authentication.confirm_password") %></label><br/>
 <%%= f.password_field :password_confirmation %></p>
-
-<%% else -%>
-  <%%= t(:associating_to_id, :id => session[:openid_identifier]) %>
-<%% end -%>
-
 <p><%%= submit_tag ( authenticated? ? t(:create) : t(:join) ) %></p>
 <%% end -%>

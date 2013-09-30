@@ -152,7 +152,7 @@ class StationAgentGenerator < Rails::Generator::NamedBase
       # Controller templates
       m.template 'signup.html.erb', File.join('app/views', model_controller_class_path, model_controller_file_name, "new.html.erb")
 
-      for action in %w( show.html.erb show.atomsvc.builder show.xrds.builder ) do
+      for action in %w( show.html.erb show.atomsvc.builder ) do
         m.template action, File.join('app/views', model_controller_class_path, model_controller_file_name, action)
       end
 

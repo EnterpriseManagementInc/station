@@ -86,8 +86,7 @@ module ActiveRecord #:nodoc:
       def acts_as_agent(options = {})
         ActiveRecord::Agent.register_class(self)
 
-        options[:authentication] ||= [:sso_cac, :login_and_password, :openid, :cookie_token ]
-        options[:openid_server]  ||= false
+        options[:authentication] ||= [:sso_cac, :login_and_password, :cookie_token ]
         options[:activation]     ||= false
         options[:invite] = :email if options[:invite].nil?
 
@@ -102,10 +101,6 @@ module ActiveRecord #:nodoc:
         #
         options[:authentication].each do |method|
           include "ActiveRecord::Agent::Authentication::#{ method.to_s.camelize }".constantize
-        end
-
-        if options[:openid_server]
-          include OpenidServer
         end
 
         if options[:authentication].include?(:login_and_password)
@@ -156,9 +151,6 @@ module ActiveRecord #:nodoc:
       def needs_password?
         # False is Login/Password is not supported by this Agent
         return false unless self.class.agent_options[:authentication].include?(:login_and_password)
-        # False if OpenID is suported and there is already an OpenID Owning associated
-        ! (self.class.agent_options[:authentication].include?(:openid) &&
-             ( openid_identifier.present? || openid_ownings.remote.any? ))
       end
 
       # All Stages in which this Agent has a Performance
@@ -177,11 +169,7 @@ module ActiveRecord #:nodoc:
       end
 
       def service_documents
-        if self.class.agent_options[:authentication].include?(:openid)
-          openid_uris.map(&:atompub_service_document)
-        else
-          Array.new
-        end
+        Array.new
       end
     end
   end

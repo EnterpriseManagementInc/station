@@ -39,11 +39,6 @@ module ActionController #:nodoc:
     # Responds to Atom Service format, returning the Containers this Agent can post to
     def show
       respond_to do |format|
-        format.html {
-          if agent.class.agent_options[:openid_server]
-            headers['X-XRDS-Location'] = polymorphic_url(agent, :format => :xrds)
-          end
-        }
         format.atomsvc
         format.xrds
       end
@@ -64,7 +59,6 @@ module ActionController #:nodoc:
 
       unless authenticated?
         cookies.delete :auth_token
-        @agent.openid_identifier = session[:openid_identifier]
       end
 
       @agent.save!
