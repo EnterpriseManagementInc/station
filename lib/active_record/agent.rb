@@ -150,7 +150,7 @@ module ActiveRecord #:nodoc:
       # and it hasn't any OpenID Owning
       def needs_password?
         # False is Login/Password is not supported by this Agent
-        return false unless self.class.agent_options[:authentication].include?(:login_and_password)
+        return true
       end
 
       # All Stages in which this Agent has a Performance
