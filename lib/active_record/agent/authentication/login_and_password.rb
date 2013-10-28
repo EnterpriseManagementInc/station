@@ -20,7 +20,7 @@ module ActiveRecord #:nodoc:
 
             validates_presence_of     :password,                   :if => "needs_password? && password_not_saved?"
             validates_presence_of     :password_confirmation,      :if => "needs_password? && password_not_saved?"
-            validates_length_of       :password, :within => 4..40, :if => "needs_password? && password_not_saved?"
+            validates_length_of       :password, :within => 15..40, :if => "needs_password? && password_not_saved?"
             validates_confirmation_of :password,                   :if => "needs_password? && password_not_saved?"
             # prevents a user from submitting a crafted form that bypasses activation
             # anything else you want your user to change should be added here.
