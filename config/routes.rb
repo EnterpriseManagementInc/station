@@ -1,16 +1,5 @@
 Rails.application.routes.draw do
 
-  #map.openid_server 'openid_server', :controller => 'openid_server'
-  resource :openid_server
-
-#TODO
-  get 'session/open_id_complete', :to => 'sessions#create', :open_id_complete => true, :as => 'open_id_complete'
-  #map.open_id_complete 'session/open_id_complete',
-  #                     { :controller => 'sessions',
-  #                       :action     => 'create',
-  #                       :conditions => { :method => :get },
-  #                       :open_id_complete => true }
-
   resource :session
 
   match 'caclogin', :to => 'sessions#create', :as => 'login'
@@ -36,10 +25,6 @@ Rails.application.routes.draw do
     #               :controller => ActiveRecord::Agent.activation_class.to_s.tableize,
     #               :action => 'reset_password',
     #               :reset_password_code => nil
-  end
-
-  if ActiveRecord::Agent::authentication_classes(:openid).any?
-    resources :open_id_ownings
   end
 
   resources :tags
